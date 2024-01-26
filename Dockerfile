@@ -6,11 +6,19 @@ LABEL version="1.0"
 
 WORKDIR /workspace
 
+# timezone support
+ENV TZ=UTC
+RUN apk add --update tzdata --no-cache &&\
+    cp /usr/share/zoneinfo/${TZ} /etc/localtime &&\
+    echo $TZ > /etc/timezone
+
 RUN apk add --no-cache --update \
         bash \
         conntrack-tools \
         coreutils \
         curl \
+        jq \
+        yq \
         nano \
         drill \
         iperf3 \
@@ -28,5 +36,6 @@ RUN apk add --no-cache --update \
         tcpdump \
         tcptraceroute \
         traceroute \
+        bind-tools \
         busybox-extras \
         lz4 zstd
