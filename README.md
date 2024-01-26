@@ -4,7 +4,7 @@ Nettools to debugs. Container image with network tools for troubleshooting Kuber
 - To check some networking issues in a cluster:
 
 ```sh
-kubectl run -it --image=ghcr.io/duyhenryer/nettools:1.0.0 nettools --restart=Never -n default
+kubectl run -it --image=ghcr.io/duyhenryer/nettools:2.0.0 nettools --restart=Never -n default
 ```
 
 - Pod template example:
@@ -17,7 +17,7 @@ metadata:
 spec:
   containers:
   - name: nettools
-    image: ghcr.io/duyhenryer/nettools:1.0.0
+    image: ghcr.io/duyhenryer/nettools:2.0.0
     command: ["/bin/sleep", "infinity"]
     imagePullPolicy: IfNotPresent
   restartPolicy: Never
@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
       - name: nettools
-        image: ghcr.io/duyhenryer/nettools:1.0.0
+        image: ghcr.io/duyhenryer/nettools:2.0.0
         command: ["/bin/sleep", "infinity"]
         imagePullPolicy: IfNotPresent
 ```
@@ -58,5 +58,5 @@ kubectl exec -it nettools -n default bash
 - If you just want to use the network tools on a docker host:
 
 ```sh
-docker run -it ghcr.io/duyhenryer/nettools:1.0.0 sh
+docker run -it ghcr.io/duyhenryer/nettools:2.0.0 sh
 ```
