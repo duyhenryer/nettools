@@ -15,7 +15,7 @@ jobs:
 
   build-oci-image:
     # https://github.com/actions/runner-images
-    runs-on: latest
+    runs-on: ubuntu-latest
 
     # https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs
     permissions:
