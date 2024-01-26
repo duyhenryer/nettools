@@ -1,7 +1,7 @@
 FROM alpine:3.19
 
-LABEL maintainer="Duy Henry <duyhenry@protonmail.com>"
-LABEL description="Useful network related tools"
+LABEL org.opencontainers.image.authors="Duy Henry <duyhenry@protonmail.com>"
+LABEL org.opencontainers.image.description DESCRIPTION="Useful network related tools"
 LABEL version="1.0"
 
 WORKDIR /workspace
