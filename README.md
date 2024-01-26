@@ -58,5 +58,5 @@ kubectl exec -it nettools -n default bash
 - If you just want to use the network tools on a docker host:
 
 ```sh
-docker run -it ghcr.io/duyhenryer/nettools:1.0.0
+docker run -it ghcr.io/duyhenryer/nettools:1.0.0 sh
 ```
