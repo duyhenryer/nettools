@@ -1,7 +1,7 @@
 FROM alpine:3.19
 
 LABEL org.opencontainers.image.authors="Duy Henry <duyhenry@protonmail.com>"
-LABEL org.opencontainers.image.description DESCRIPTION="Useful network related tools"
+LABEL org.opencontainers.image.description="Useful network related tools"
 LABEL version="1.0"
 
 WORKDIR /workspace
@@ -38,4 +38,5 @@ RUN apk add --no-cache --update \
         traceroute \
         bind-tools \
         busybox-extras \
-        lz4 zstd
+        lz4 zstd \
+        vim
