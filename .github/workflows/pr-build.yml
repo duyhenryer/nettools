@@ -48,6 +48,18 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
 
+      # - name: calculate branch name IF branch
+      #   if: github.ref_type == 'branch' # 'branch' if regular push
+      #   run: |
+      #     echo "GITHUB_REF_NAME = $GITHUB_REF_NAME"
+      #     echo "GITHUB_SHA = ${{ github.event.pull_request.head.sha }}"
+      #     short_sha=`git rev-parse --short ${{ github.event.pull_request.head.sha }}`
+      #     echo "short SHA = $short_sha"
+      #     echo candidates for branch name
+      #     git for-each-ref | grep ^$short_sha | grep origin | grep -v HEAD
+      #     branch_name=`git for-each-ref | grep ^$short_sha | grep origin | grep -v HEAD | head -n1 | sed "s/.*\///"`
+      #     echo tag $GITHUB_REF_NAME is on branch $branch_name
+
       - name: calculate branch name IF branch
         if: github.ref_type == 'branch' # 'branch' if regular push
         run: |
