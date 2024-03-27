@@ -12,94 +12,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-      # debug
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event from ${{ github.actor }}."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-
-      # checkout
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # all history for tags and branches, needed to resolve tag->branch name
-
-      # https://docs.docker.com/build/ci/github-actions/multi-platform/
-      # QEMU for software emulation of multiple platforms
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
-      # Docker buildx/buildkit for multi-platform builds
+        with:
+          platforms: arm64,amd64
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        id: buildx
+        uses: docker/setup-buildx-action@v2
 
-      # debug
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
+      - name: Available platforms
+        run: echo ${{ steps.buildx.outputs.platforms }}
+
+      - name: Run Buildx
         run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
-
-      # debug github context and env
-      - name: Dump env
-        run: env | sort
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-
-      # - name: calculate branch name IF branch
-      #   if: github.ref_type == 'branch' # 'branch' if regular push
-      #   run: |
-      #     echo "GITHUB_REF_NAME = $GITHUB_REF_NAME"
-      #     echo "GITHUB_SHA = ${{ github.event.pull_request.head.sha }}"
-      #     short_sha=`git rev-parse --short ${{ github.event.pull_request.head.sha }}`
-      #     echo "short SHA = $short_sha"
-      #     echo candidates for branch name
-      #     git for-each-ref | grep ^$short_sha | grep origin | grep -v HEAD
-      #     branch_name=`git for-each-ref | grep ^$short_sha | grep origin | grep -v HEAD | head -n1 | sed "s/.*\///"`
-      #     echo tag $GITHUB_REF_NAME is on branch $branch_name
-
-      - name: calculate branch name IF branch
-        if: github.ref_type == 'branch' # 'branch' if regular push
-        run: |
-          echo "GITHUB_REF_NAME = $GITHUB_REF_NAME"
-          echo "GITHUB_SHA = ${{ github.event.pull_request.head.sha }}"
-          short_sha=`git rev-parse --short ${{ github.event.pull_request.head.sha }}`
-          echo "short SHA = $short_sha"
-          branch_name=$short_sha
-
-      # tags and labels
-      - name: Extract metadata (tags, labels) for image ${{ env.FULL_IMAGE_NAME }}
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          # https://docs.github.com/en/actions/publishing-packages/publishing-docker-images
-          images: |
-            ${{ env.GH_REGISTRY }}/${{ env.FULL_IMAGE_NAME }}
-          tags: |
-            type=semver,pattern={{version}}
-            type=ref,event=pr
-            type=ref,event=branch
-            # in addition to full semantic version (x.y.z) would also create (x.y)
-            #type=semver,pattern={{major}}.{{minor}}
-
-      - name: Get fresh build arguments
-        shell: bash
-        run: echo -e "BUILD_TIME=$(date -u '+%Y-%m-%d_%H:%M:%S')\nGITREF=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-        id: get_buildargs
-
-      - name: Build PR Image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: false
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          build-args: |
-            MY_VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
-            MY_BUILTBY=github-action
-            BUILD_TIME=${{ steps.get_buildargs.outputs.BUILD_TIME }}
-            GITREF=${{ steps.get_buildargs.outputs.GITREF }}
-            GITREF_long="${{ github.sha }}"
+          docker buildx build \
+            --platform linux/amd64,linux/arm64 \
+            --output "type=image,push=false" \
+            --file ./Dockerfile .
