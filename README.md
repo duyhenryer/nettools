@@ -60,3 +60,18 @@ kubectl exec -it nettools -n default bash
 ```sh
 docker run -it ghcr.io/duyhenryer/nettools:2.0.1 sh
 ```
+
+#### Sample Use-cases
+
+`tcpdump` is a powerful and common packet analyzer that runs under the command line. 
+It allows the user to display TCP/IP and other packets being transmitted or received over an attached network interface.
+
+```sh
+tcpdump -i eth0 port 9999 -c 1 -Xvv
+```
+More info on tcpdump can be found [here](http://www.tcpdump.org/tcpdump_man.html).
+
+`netstat` is a useful tool for checking your network configuration and activity.
+```sh
+netstat -tulpn
+```
