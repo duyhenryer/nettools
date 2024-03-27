@@ -67,10 +67,7 @@ jobs:
           echo "GITHUB_SHA = ${{ github.event.pull_request.head.sha }}"
           short_sha=`git rev-parse --short ${{ github.event.pull_request.head.sha }}`
           echo "short SHA = $short_sha"
-          echo candidates for branch name
-          git for-each-ref | grep ^$short_sha | grep origin | grep -v HEAD
-          branch_name=`git for-each-ref | grep ^$short_sha | grep origin | grep -v HEAD | head -n1 | sed "s/.*\///"`
-          echo tag $GITHUB_REF_NAME is on branch $branch_name
+          branch_name=$short_sha
 
       # tags and labels
       - name: Extract metadata (tags, labels) for image ${{ env.FULL_IMAGE_NAME }}
