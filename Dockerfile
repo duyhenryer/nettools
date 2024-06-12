@@ -43,3 +43,7 @@ RUN apk add --no-cache --update \
     openssl \
     ipset \
     ripgrep
+
+RUN apk update && apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing grpcurl
+
+    
