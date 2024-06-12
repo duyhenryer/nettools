@@ -39,4 +39,7 @@ RUN apk add --no-cache --update \
     bind-tools \
     busybox-extras \
     lz4 zstd \
-    vim
+    vim \
+    openssl \
+    ipset \
+    ripgrep

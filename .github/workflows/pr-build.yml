@@ -1,0 +1,33 @@
+name: PR-Build
+
+run-name: PR Build Image
+
+on:
+  pull_request:
+    branches: ['main']
+    
+jobs:
+  pr-build:
+    # https://github.com/actions/runner-images
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64,amd64
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Available platforms
+        run: echo ${{ steps.buildx.outputs.platforms }}
+
+      - name: Run Buildx
+        run: |
+          docker buildx build \
+            --platform linux/amd64,linux/arm64 \
+            --output "type=image,push=false" \
+            --file ./Dockerfile .
