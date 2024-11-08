@@ -1,4 +1,4 @@
-FROM alpine:3.19
+FROM alpine:3.19.1
 
 LABEL org.opencontainers.image.authors="Duy Henry <duyhenry@protonmail.me>"
 LABEL org.opencontainers.image.description="Useful network related tools"
@@ -13,6 +13,8 @@ RUN apk add --update tzdata --no-cache &&\
     echo $TZ > /etc/timezone
 
 RUN apk add --no-cache --update \
+    apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing grpcurl && \
+    apk add --no-cache \
     bash \
     conntrack-tools \
     coreutils \
@@ -42,8 +44,9 @@ RUN apk add --no-cache --update \
     vim \
     openssl \
     ipset \
-    ripgrep
+    ripgrep \
+    mysql-client \
+    postgresql-client \
+    && rm -rf /var/cache/apk/*
 
-RUN apk update && apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing grpcurl
-
-    
+CMD ["bash"]
