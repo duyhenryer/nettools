@@ -1,14 +1,48 @@
 # nettools
-Nettools to debugs. Container image with network tools for troubleshooting Kubernetes clusters
+Nettools to debugs. A container image with common networking and debugging tools for troubleshooting Kubernetes clusters.
 
-- To check some networking issues in a cluster:
+### Available Tools
+***Network Tools***
 
+- `curl`, `wget`: HTTP clients
+- `tcpdump`: Network packet analyzer
+- `iptables`, `ip6tables`: Firewall management
+- `iproute2`: Network configuration
+- `nftables`: Next-generation firewall
+- `mtr`, traceroute: Network route tracing
+- `socat`: Multipurpose relay
+- `iperf3`: Network performance testing
+- `netcat-openbsd`: TCP/UDP connections
+- `nmap`: Network scanner
+- `drill`, `bind-tools`: DNS tools
+
+***Debugging Tools***
+- `strace`: System call tracer
+- `grpcurl`: gRPC testing tool
+- `htop`: Process monitor
+- `conntrack-tools`: Connection tracking
+- `ethtool`: Network interface tool
+
+***Database Clients***
+- `postgresql-client`: Connection PostgreSQL
+- `mysql-client`: Connection Mysql
+
+***Utility Tools***
+- `jq`, `yq`: JSON/YAML processors
+- `vim`: Text editors
+- `bash`: Shell
+
+### Quick Start
+- Run as a Pod
 ```sh
 kubectl run -it --image=ghcr.io/duyhenryer/nettools:2.0.1 nettools --restart=Never -n default
 ```
-
-- Pod template example:
-````yaml
+- Run as Docker container
+```sh
+docker run -it ghcr.io/duyhenryer/nettools:2.0.1 sh
+```
+- Pod Template
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -21,8 +55,8 @@ spec:
     command: ["/bin/sleep", "infinity"]
     imagePullPolicy: IfNotPresent
   restartPolicy: Never
-````
-- Deplyment template example:
+```
+- Deployment Template
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -45,26 +79,10 @@ spec:
         command: ["/bin/sleep", "infinity"]
         imagePullPolicy: IfNotPresent
 ```
+### Common Use-Cases
 
-You can keep the following yaml file handy and run it in a pod
-
-```sh 
-kubectl apply -f nettools.yaml
-```
-and login to the container
-```sh 
-kubectl exec -it nettools -n default bash
-```
-- If you just want to use the network tools on a docker host:
-
-```sh
-docker run -it ghcr.io/duyhenryer/nettools:2.0.1 sh
-```
-
-#### Sample Use-cases
-
-`tcpdump` is a powerful and common packet analyzer that runs under the command line. 
-It allows the user to display TCP/IP and other packets being transmitted or received over an attached network interface.
+`tcpdump`
+- Packet analyzer for network debugging.
 
 ```sh
 tcpdump -i eth0 port 9999 -c 1 -Xvv
@@ -73,5 +91,16 @@ More info on tcpdump can be found [here](http://www.tcpdump.org/tcpdump_man.html
 
 `netstat` is a useful tool for checking your network configuration and activity.
 ```sh
+# List all TCP/UDP ports
 netstat -tulpn
+
+# Show routing table
+netstat -r
 ```
+### Version History
+2.0.2: Current stable version
+- Added `grpcurl`
+- Base image updated to Alpine 3.19.1
+
+### Contributing
+Issues and pull requests are welcome!
