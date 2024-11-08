@@ -98,7 +98,7 @@ netstat -tulpn
 netstat -r
 ```
 ### Version History
-2.0.1: Current stable version
+2.0.2: Current stable version
 - Added grpcurl
 - Base image updated to Alpine 3.19.1
 
