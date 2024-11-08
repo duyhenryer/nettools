@@ -12,8 +12,7 @@ RUN apk add --update tzdata --no-cache &&\
     cp /usr/share/zoneinfo/${TZ} /etc/localtime &&\
     echo $TZ > /etc/timezone
 
-RUN apk add --no-cache --update \
-    apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing grpcurl && \
+RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing grpcurl && \
     apk add --no-cache \
     bash \
     conntrack-tools \
