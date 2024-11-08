@@ -99,7 +99,7 @@ netstat -r
 ```
 ### Version History
 2.0.2: Current stable version
-- Added grpcurl
+- Added `grpcurl`
 - Base image updated to Alpine 3.19.1
 
 ### Contributing
