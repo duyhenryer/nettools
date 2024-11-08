@@ -21,7 +21,6 @@ RUN apk add --no-cache --update \
     curl \
     jq \
     yq \
-    nano \
     drill \
     iperf3 \
     iproute2 \
@@ -44,6 +43,7 @@ RUN apk add --no-cache --update \
     vim \
     openssl \
     ipset \
+    htop \
     ripgrep \
     mysql-client \
     postgresql-client \
