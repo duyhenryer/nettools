@@ -35,11 +35,11 @@ Nettools to debugs. A container image with common networking and debugging tools
 ### Quick Start
 - Run as a Pod
 ```sh
-kubectl run -it --image=ghcr.io/duyhenryer/nettools:2.0.1 nettools --restart=Never -n default
+kubectl run -it --image=ghcr.io/duyhenryer/nettools:2.0.2 nettools --restart=Never -n default
 ```
 - Run as Docker container
 ```sh
-docker run -it ghcr.io/duyhenryer/nettools:2.0.1 sh
+docker run -it ghcr.io/duyhenryer/nettools:2.0.2 sh
 ```
 - Pod Template
 ```yaml
@@ -51,7 +51,7 @@ metadata:
 spec:
   containers:
   - name: nettools
-    image: ghcr.io/duyhenryer/nettools:2.0.1
+    image: ghcr.io/duyhenryer/nettools:2.0.2
     command: ["/bin/sleep", "infinity"]
     imagePullPolicy: IfNotPresent
   restartPolicy: Never
@@ -75,7 +75,7 @@ spec:
     spec:
       containers:
       - name: nettools
-        image: ghcr.io/duyhenryer/nettools:2.0.1
+        image: ghcr.io/duyhenryer/nettools:2.0.2
         command: ["/bin/sleep", "infinity"]
         imagePullPolicy: IfNotPresent
 ```
