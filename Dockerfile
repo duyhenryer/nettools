@@ -40,6 +40,7 @@ RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/te
     busybox-extras \
     lz4 zstd \
     vim \
+    aws-cli \
     openssl \
     ipset \
     htop \
