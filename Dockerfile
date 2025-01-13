@@ -12,7 +12,7 @@ RUN apk add --update tzdata --no-cache &&\
     cp /usr/share/zoneinfo/${TZ} /etc/localtime &&\
     echo $TZ > /etc/timezone
 
-RUN apk add --no-cache \
+RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing grpcurl \
     bash \
     conntrack-tools \
     coreutils \
@@ -46,7 +46,7 @@ RUN apk add --no-cache \
     mysql-client \
     postgresql-client \
     && rm -rf /var/cache/apk/*\
-    
+
 RUN apk add aws-cli \
     && rm -rf /var/cache/apk/*
 
