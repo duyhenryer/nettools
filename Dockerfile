@@ -1,4 +1,4 @@
-FROM alpine:3.19.1
+FROM alpine:3.20
 
 LABEL org.opencontainers.image.authors="Duy Henry <duyhenry@protonmail.me>"
 LABEL org.opencontainers.image.description="Useful network related tools"
@@ -48,4 +48,4 @@ RUN apk add --no-cache \
     postgresql-client \
     && rm -rf /var/cache/apk/*
 
-CMD ["bash"]
+CMD ["/bin/bash"]
