@@ -39,13 +39,15 @@ RUN apk add --no-cache \
     busybox-extras \
     lz4 zstd \
     vim \
-    aws-cli \
     openssl \
     ipset \
     htop \
     ripgrep \
     mysql-client \
     postgresql-client \
+    && rm -rf /var/cache/apk/*\
+    
+RUN apk add aws-cli \
     && rm -rf /var/cache/apk/*
 
 CMD ["/bin/bash"]
