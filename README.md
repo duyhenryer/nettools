@@ -43,6 +43,7 @@ docker run -it ghcr.io/duyhenryer/nettools:2.0.2 sh
 ```
 - Pod Template
 ```yaml
+cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Pod
 metadata:
@@ -55,9 +56,12 @@ spec:
     command: ["/bin/sleep", "infinity"]
     imagePullPolicy: IfNotPresent
   restartPolicy: Never
+EOF
+
 ```
 - Deployment Template
 ```yaml
+cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -75,9 +79,8 @@ spec:
     spec:
       containers:
       - name: nettools
-        image: ghcr.io/duyhenryer/nettools:2.0.2
-        command: ["/bin/sleep", "infinity"]
-        imagePullPolicy: IfNotPresent
+        image: ghcr.io/duyhenryer/nettools:2.0
+
 ```
 ### Common Use-Cases
 
