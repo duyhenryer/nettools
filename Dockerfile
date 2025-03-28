@@ -45,7 +45,8 @@ RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/te
     ripgrep \
     mysql-client \
     postgresql-client \
-    && rm -rf /var/cache/apk/*\
+    aws-cli
+    && rm -rf /var/cache/apk/*
 
 RUN apk add aws-cli \
     && rm -rf /var/cache/apk/*
