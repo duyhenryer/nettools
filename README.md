@@ -101,12 +101,12 @@ netstat -tulpn
 netstat -r
 ```
 ### Version History
-3.0.0: Stable version
-- Upgrade alpine 3.21 version  to  support `aws-cli`
-- Added `aws-cli`
-3.0.0: Current stable version
-- Added `grpcurl`
-- Base image updated to Alpine 3.19.1
+- 3.0.0: Stable version
+  - Upgrade alpine 3.21 version  to  support `aws-cli`
+  - Added `aws-cli`
+- 2.0.3: Current stable version
+  - Added `grpcurl`
+  - Base image updated to Alpine 3.19.1
 
 ### Contributing
 Issues and pull requests are welcome!
