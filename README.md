@@ -79,7 +79,7 @@ spec:
     spec:
       containers:
       - name: nettools
-        image: ghcr.io/duyhenryer/nettools:2.0
+        image: ghcr.io/duyhenryer/nettools:3.0.0
 
 ```
 ### Common Use-Cases
