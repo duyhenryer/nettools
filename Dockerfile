@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:3.21
 
 LABEL org.opencontainers.image.authors="Duy Henry <duyhenry@protonmail.me>"
 LABEL org.opencontainers.image.description="Useful network related tools"
@@ -45,7 +45,8 @@ RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/te
     ripgrep \
     mysql-client \
     postgresql-client \
-    && rm -rf /var/cache/apk/*\
+    aws-cli \
+    && rm -rf /var/cache/apk/*
 
 RUN apk add aws-cli \
     && rm -rf /var/cache/apk/*

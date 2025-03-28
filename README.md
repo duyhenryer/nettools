@@ -35,11 +35,11 @@ Nettools to debugs. A container image with common networking and debugging tools
 ### Quick Start
 - Run as a Pod
 ```sh
-kubectl run -it --image=ghcr.io/duyhenryer/nettools:2.0.2 nettools --restart=Never -n default
+kubectl run -it --image=ghcr.io/duyhenryer/nettools:3.0.0 nettools --restart=Never -n default
 ```
 - Run as Docker container
 ```sh
-docker run -it ghcr.io/duyhenryer/nettools:2.0.2 sh
+docker run -it ghcr.io/duyhenryer/nettools:3.0.0 sh
 ```
 - Pod Template
 ```yaml
@@ -52,7 +52,7 @@ metadata:
 spec:
   containers:
   - name: nettools
-    image: ghcr.io/duyhenryer/nettools:2.0.2
+    image: ghcr.io/duyhenryer/nettools:3.0.0
     command: ["/bin/sleep", "infinity"]
     imagePullPolicy: IfNotPresent
   restartPolicy: Never
@@ -101,7 +101,10 @@ netstat -tulpn
 netstat -r
 ```
 ### Version History
-2.0.2: Current stable version
+3.0.0: Stable version
+- Upgrade alpine 3.21 version  to  support `aws-cli`
+- Added `aws-cli`
+3.0.0: Current stable version
 - Added `grpcurl`
 - Base image updated to Alpine 3.19.1
 
