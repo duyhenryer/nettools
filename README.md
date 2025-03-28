@@ -101,8 +101,9 @@ netstat -tulpn
 netstat -r
 ```
 ### Version History
-2.0.3: Mirro version
-- Added `awl-cli`
+3.0.0: Stable version
+- Upgrade alpine 3.21 version  to  support `aws-cli`
+- Added `aws-cli`
 2.0.3: Current stable version
 - Added `grpcurl`
 - Base image updated to Alpine 3.19.1
